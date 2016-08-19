@@ -1,0 +1,13 @@
+name: 'Hook Post Action Telegram'
+type: module
+description: 'A working example for hook_post_action module for Telegram'
+# core: 8.x
+package: Drupal
+dependencies:
+  - hook_post_action
+
+# Information added by Drupal.org packaging script on 2016-04-10
+version: '8.x-1.0-beta1'
+core: '8.x'
+project: 'hook_post_action'
+datestamp: 1460275142

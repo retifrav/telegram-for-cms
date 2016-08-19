@@ -1,0 +1,17 @@
+{
+	"name": "HTTP POST to Telegram bot",
+	"author": "retif",
+	"url": "https://github.com/retifrav/telegram-for-cms",
+	"description": "Sends a notification to Telegram about new change",
+	"version": "0.3",
+	"license-name": "MIT",
+	"type": "other",
+	"AutoloadClasses": {
+		"HPtoTB": "hp2tb_body.php"
+	},
+	"Hooks": {
+		"PageContentSaveComplete": [
+			"HPtoTB::sendNotification"
+		]
+	}
+}

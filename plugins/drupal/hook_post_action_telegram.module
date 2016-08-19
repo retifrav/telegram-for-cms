@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * @file
+ * Telegram notifications
+ * retif, 2016
+ * github.com/retifrav/telegram-for-cms
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_entity_postsave()
+ */
+function hook_post_action_telegram_entity_postsave(EntityInterface $entity, $op) {
+  // ID for the entity (post, comment or something else)
+  $id = $entity->id();
+  $entity_type = $entity->getEntityTypeId();
+
+  // write some info to log (you can view log at admin menu Reports -> Recent log messages)
+  \Drupal::logger('hook_post_action')->info("[telegram] {$op} entity {$entity_type} with ID '{$id}' from " . __FUNCTION__);
+    
+    // we want to notify only about new posts, ignoring comments
+    if ($entity_type == "node" && ($op == "insert" || $op == "update"))
+    {
+        try
+        {
+          // Telegram user or channel ID (not the bot token)
+          $chatID = SOME-TELEGRAM-ID-HERE;
+          
+          // some info about the post
+          $node = node_load($id);
+          $ttl = $node->getTitle();
+          
+          // URL to the post
+          global $base_url;
+          $posturl = $base_url . $entity->url();
+          
+          // notify only about published posts
+          if ($node->isPublished() == 1)
+          {
+              // message will be with Markdown
+              //$msg = "{$entity_type} / {$op} with ID '{$id}': " . $posturl;
+              $msg = "New post: \"_{$ttl}_\". " . str_replace("_", "\_", $posturl);
+              
+              // cURL stuff
+              $ch = curl_init("https://api.telegram.org/TELEGRAM-BOT-TOKEN-HERE/sendMessage?chat_id=" . $chatID . "&text=" . trim(preg_replace('/\s+/', ' ', $msg)) . "&parse_mode=Markdown&disable_web_page_preview=true");
+              curl_setopt($ch, CURLOPT_POST, 1);
+              curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
+              curl_exec($ch);
+              curl_close ($ch);
+          }
+        }
+        catch(Exception $ex)
+        {
+            // log exception
+            \Drupal::logger('hook_post_action')->info("[telegram] Error: " . $ex->getMessage());
+        }
+    }
+}
