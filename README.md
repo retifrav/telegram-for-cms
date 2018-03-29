@@ -1,4 +1,5 @@
 # Telegram for CMS
+
 Telegram notifications for your CMS.
 
 Long story short: you can send notifications about updates at your website (new posts, comments) via [Telegram](https://telegram.org). It's amazingly simple, everything is done by simple [HTTP requests](https://core.telegram.org/bots/api#making-requests). So, you only need to hook up "publish" event at your CMS.
@@ -7,11 +8,10 @@ For this to work you need a [Telegram bot](https://core.telegram.org/bots#3-how-
 
 I have written simple plugins that do such thing for [Wordpress](https://wordpress.org), [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki) and [Drupal](https://www.drupal.org).
 
-
 ## Wordpress
 
 You need to hook you functions to [publish_post](https://codex.wordpress.org/Plugin_API/Action_Reference/publish_post) or [comment_post](https://codex.wordpress.org/Plugin_API/Action_Reference/comment_post).<br/>
-Here's more detailed [article](https://retifrav.github.io/blog/2015/11/07/wordpress-plugin-telegram/) (in Russian).
+Here's more detailed [article](https://retifrav.github.io/blog/2015/11/08/wordpress-plugin-telegram/) (in Russian).
 
 ## MediaWiki
 
