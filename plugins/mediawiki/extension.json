@@ -1,17 +1,26 @@
 {
+	"manifest_version": 2,
 	"name": "HTTP POST to Telegram bot",
 	"author": "retif",
-	"url": "https://github.com/retifrav/telegram-for-cms",
-	"description": "Sends a notification to Telegram about new change",
-	"version": "0.3",
-	"license-name": "MIT",
+	"url": "https://github.com/retifrav/telegram-for-cms/tree/master/plugins/mediawiki",
+	"description": "Sends a notification to Telegram about a new change",
+	"version": "0.4",
+	"license-name": "GPLv3",
 	"type": "other",
-	"AutoloadClasses": {
+	"AutoloadClasses":
+	{
 		"HPtoTB": "hp2tb_body.php"
 	},
-	"Hooks": {
-		"PageContentSaveComplete": [
+	"Hooks":
+	{
+		"PageSaveComplete":
+		[
 			"HPtoTB::sendNotification"
 		]
+	},
+	"config":
+	{
+		"HPtoTBToken": { "value": "" },
+		"HPtoTBChatID": { "value": "" }
 	}
 }

@@ -1,5 +1,3 @@
 <?php
 
-if(!defined('MEDIAWIKI')){
-    die();
-}
+if(!defined('MEDIAWIKI')) { die(); }
